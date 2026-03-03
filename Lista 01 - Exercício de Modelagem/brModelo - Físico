@@ -1,0 +1,63 @@
+/* Trabalho_Paulo_Lógico_final: */
+
+CREATE TABLE CLIENTES (
+    Cod_Cliente INT PRIMARY KEY,
+    Nome VARCHAR,
+    Sobrenome VARCHAR,
+    Inicial VARCHAR,
+    DDD INT,
+    Telefone INT,
+    Saldo FLOAT
+);
+
+CREATE TABLE FATURAS (
+    Num_Fatura INT PRIMARY KEY,
+    Data_Fatura DATE,
+    Cod_Cliente INT
+);
+
+CREATE TABLE LINHAS (
+    Num_Linhas INT PRIMARY KEY,
+    Unidades INT,
+    Valor FLOAT,
+    Num_Fatura INT
+);
+
+CREATE TABLE PRODUTOS (
+    Cod_Produtos INT PRIMARY KEY,
+    Descrição VARCHAR,
+    Data_Compras DATE,
+    Quantidade INT,
+    Valor FLOAT,
+    Num_Linhas INT,
+    Cod_Fornecedor INT
+);
+
+CREATE TABLE FORNECEDORES (
+    Cod_Fornecedor INT PRIMARY KEY,
+    Nome VARCHAR,
+    DDD INT,
+    Contato INT,
+    Telefone INT,
+    Estado VARCHAR
+);
+ 
+ALTER TABLE FATURAS ADD CONSTRAINT FK_FATURAS_2
+    FOREIGN KEY (Cod_Cliente)
+    REFERENCES CLIENTES (Cod_Cliente);
+ 
+ALTER TABLE LINHAS ADD CONSTRAINT FK_LINHAS_2
+    FOREIGN KEY (Cod_Produto)
+    REFERENCES PRODUTOS (Cod_Produtos);
+ 
+ALTER TABLE LINHAS ADD CONSTRAINT FK_LINHAS_3
+    FOREIGN KEY (Num_Fatura)
+    REFERENCES FATURAS (Num_Fatura);
+ 
+ALTER TABLE PRODUTOS ADD CONSTRAINT FK_PRODUTOS_2
+    FOREIGN KEY (Num_Linhas)
+    REFERENCES LINHAS (Num_Linhas);
+ 
+ALTER TABLE PRODUTOS ADD CONSTRAINT FK_PRODUTOS_3
+    FOREIGN KEY (Cod_Fornecedor)
+    REFERENCES FORNECEDORES (Cod_Fornecedor);
